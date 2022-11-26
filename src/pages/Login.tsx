@@ -3,10 +3,10 @@ import { LockClosedIcon } from '@heroicons/react/20/solid'
 
 const Login = () => {
     return (
-        <div className="bg-tertiary min-h-full">
+        <div>
             <div className="flex min-h-full items-center justify-center py-12 px-6 sm:px-8 lg:px-12">
                 <div className="w-full max-w-md space-y-8">
-                    <div className="text-primary">
+                    <div>
                         <img
                             className="mx-auto h-36 mw-auto"
                             src="/assets/img/Polylink.png"
@@ -22,9 +22,9 @@ const Login = () => {
                             </a>
                         </p>
                     </div>
-                    <form className="mt-8 space-y-6" action="#" method="POST">
+                    <form className="mt-8 space-y-6" action="/home" method="GET">
                         <input type="hidden" name="remember" defaultValue="true" />
-                        <div className="-space-y-px rounded-md shadow-sm">
+                        <div className="-space-y-px rounded-md shadow-sm ">
                             <div>
                                 <label htmlFor="email-address" className="sr-only">
                                     Email address
@@ -69,7 +69,7 @@ const Login = () => {
                             </div>
 
                             <div className="text-sm">
-                                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                                <a href="#" className="font-medium text-secondary text-600 hover:text-primary">
                                     Forgot your password?
                                 </a>
                             </div>
@@ -78,7 +78,7 @@ const Login = () => {
                         <div>
                             <button
                                 type="submit"
-                                className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                className="group relative flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium hover:bg-primary hover:text-tertiary focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
                             >
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
