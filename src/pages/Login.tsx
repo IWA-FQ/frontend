@@ -5,11 +5,11 @@ const Login = () => {
     return (
         <div>
             <div className="flex min-h-full items-center justify-center py-12 px-6 sm:px-8 lg:px-12">
-                <div className="w-full max-w-md space-y-8">
+                <div className="w-full max-w-md space-y-8 rounded bg-white border-2 p-12">
                     <div>
                         <img
                             className="mx-auto h-36 mw-auto"
-                            src="/assets/img/Polylink.png"
+                            src="/assets/img/polylink-transparent.png"
                             alt="Polylink logo"
                         />
                         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight">
@@ -27,7 +27,7 @@ const Login = () => {
                         <div className="-space-y-px rounded-md shadow-sm ">
                             <div>
                                 <label htmlFor="email-address" className="sr-only">
-                                    Email address
+                                    Adresse mail
                                 </label>
                                 <input
                                     id="email-address"
@@ -36,12 +36,12 @@ const Login = () => {
                                     autoComplete="email"
                                     required
                                     className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="Email address"
+                                    placeholder="Adresse mail"
                                 />
                             </div>
                             <div>
                                 <label htmlFor="password" className="sr-only">
-                                    Password
+                                    Mot de passe
                                 </label>
                                 <input
                                     id="password"
@@ -50,7 +50,7 @@ const Login = () => {
                                     autoComplete="current-password"
                                     required
                                     className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="Password"
+                                    placeholder="Mot de passe"
                                 />
                             </div>
                         </div>
@@ -64,13 +64,13 @@ const Login = () => {
                                     className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                 />
                                 <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                                    Remember me
+                                    Se souvenir de moi
                                 </label>
                             </div>
 
                             <div className="text-sm">
                                 <a href="#" className="font-medium text-secondary text-600 hover:text-primary">
-                                    Forgot your password?
+                                    Mot de passe oublié?
                                 </a>
                             </div>
                         </div>
@@ -83,7 +83,7 @@ const Login = () => {
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
                 </span>
-                                Sign in
+                                Se connecter
                             </button>
                         </div>
                     </form>
