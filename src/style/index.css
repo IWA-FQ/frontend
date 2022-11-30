@@ -2,8 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: font1;
+  src: url("../assets/fonts/Raleway/Raleway-Regular.ttf");
+}
 body {
     height: 100vh;
     @apply text-primary;
     @apply bg-tertiary;
+
 }

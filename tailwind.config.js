@@ -10,6 +10,11 @@ module.exports = {
       'tertiary':'#F2F2F0',
       'white':'#FFFFFF',
     },
+    variants: {
+      extend: {
+        transform: ['hover'],
+      }
+    },
     extend: {},
   },
   plugins: [],
