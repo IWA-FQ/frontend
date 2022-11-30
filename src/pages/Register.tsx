@@ -5,11 +5,11 @@ const Register = () => {
     return (
         <div>
             <div className="flex min-h-full items-center justify-center py-12 px-6 sm:px-8 lg:px-12">
-                <div className="w-full max-w-md space-y-8">
+                <div className="w-full max-w-md space-y-8 rounded bg-white border-2 p-12">
                     <div>
                         <img
                             className="mx-auto h-36 mw-auto"
-                            src="/assets/img/Polylink.png"
+                            src="/assets/img/polylink-transparent.png"
                             alt="Polylink logo"
                         />
                         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight">
@@ -20,6 +20,90 @@ const Register = () => {
                         <input type="hidden" name="remember" defaultValue="true" />
                         <div className="-space-y-px rounded-md shadow-sm ">
                             <div>
+                                <label htmlFor="firstname" className="sr-only">
+                                    Prénom
+                                </label>
+                                <input
+                                    id="firstname"
+                                    name="firstname"
+                                    type="text"
+                                    autoComplete="firstname"
+                                    required
+                                    className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    placeholder="Prénom"
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="lastname" className="sr-only">
+                                    Password
+                                </label>
+                                <input
+                                    id="lastname"
+                                    name="lastname"
+                                    type="text"
+                                    autoComplete="lastname"
+                                    required
+                                    className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    placeholder="Nom de famille"
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="city" className="sr-only">
+                                    Password
+                                </label>
+                                <input
+                                    id="city"
+                                    name="city"
+                                    type="text"
+                                    autoComplete="city"
+                                    required
+                                    className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    placeholder="Ville"
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="city_code" className="sr-only">
+                                    Password
+                                </label>
+                                <input
+                                    id="city_code"
+                                    name="city_code"
+                                    type="text"
+                                    autoComplete="city_code"
+                                    required
+                                    className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    placeholder="Code postal"
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="work_field" className="sr-only">
+                                    Password
+                                </label>
+                                <input
+                                    id="work_field"
+                                    name="work_field"
+                                    type="text"
+                                    autoComplete="work_field"
+                                    required
+                                    className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    placeholder="Domaine d'activité"
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="cv_link" className="sr-only">
+                                    Password
+                                </label>
+                                <input
+                                    id="cv_link"
+                                    name="cv_link"
+                                    type="text"
+                                    autoComplete="cv_link"
+                                    required
+                                    className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    placeholder="Lien du CV (curriculum vitae)"
+                                />
+                            </div>
+                            <div>
                                 <label htmlFor="email-address" className="sr-only">
                                     Email address
                                 </label>
@@ -29,8 +113,8 @@ const Register = () => {
                                     type="email"
                                     autoComplete="email"
                                     required
-                                    className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="Email address"
+                                    className="relative block w-full appearance-none rounded-none border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    placeholder="Adresse mail"
                                 />
                             </div>
                             <div>
@@ -44,31 +128,19 @@ const Register = () => {
                                     autoComplete="current-password"
                                     required
                                     className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="Password"
+                                    placeholder="Mot de passe"
                                 />
                             </div>
-                        </div>
-
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                                <input
-                                    id="remember-me"
-                                    name="remember-me"
-                                    type="checkbox"
-                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                />
-                                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                                    Remember me
+                            <div>
+                                <label htmlFor="role" className="sr-only">
+                                    Rôle
                                 </label>
-                            </div>
-
-                            <div className="text-sm">
-                                <a href="#" className="font-medium text-secondary text-600 hover:text-primary">
-                                    Forgot your password?
-                                </a>
+                                <select name="Rôle" placeholder="Rôle">
+                                    <option value="employer"></option>
+                                    <option value="jobseeker"></option>
+                                </select>
                             </div>
                         </div>
-
                         <div>
                             <button
                                 type="submit"
@@ -77,7 +149,7 @@ const Register = () => {
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
                 </span>
-                                Sign in
+                                Enregistrer
                             </button>
                         </div>
                     </form>
