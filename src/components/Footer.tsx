@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <div className="h-full bg-secondary text-tertiary flex justify-evenly p-8">
+        <div className="bg-secondary text-tertiary flex justify-evenly p-8 relative bottom-0 w-full">
             <div className="flex flex-col justify-between">
                 <h2><strong>Créé en 2022 par</strong></h2>
                 <div>
