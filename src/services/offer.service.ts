@@ -6,3 +6,9 @@ export const getAllOffers = () : Promise<AxiosResponse> => {
     const tokenToGive: string = token ? "Bearer " + token : "";
     return axios.get("http://localhost:8080/api" + "/offer/", {headers: {Authorization: tokenToGive}})
 }
+
+export const getAllOffersByEmployer = () : Promise<AxiosResponse> => {
+    const token = getTocken();
+    const tokenToGive: string = token ? "Bearer " + token : "";
+    return axios.get("http://localhost:8080/api" + "/offer/employer", {headers: {Authorization: tokenToGive}})
+}
