@@ -1,9 +1,33 @@
-import React from 'react';
-import { LockClosedIcon } from '@heroicons/react/20/solid'
+import React, {useState} from 'react';
 import NavigationBar from "../components/NavigationBar";
+import {getTocken, isAuthenticated, login} from "../services/authentication.service";
 
 const Login = () => {
+    const [email,setEmail] = useState('')
+    const [password,setPassword] = useState('')
+    const handleInputChange = (e : any) => {
+        const {id , value} = e.target;
+        console.log(id,value);
+        switch (id) {
+            case "email" : {
+                setEmail(value)
+                break
+            }
+            case "password" : {
+                setPassword(value)
+                break
+            }
+            default : {
+                break
+            }
+        }
 
+    }
+    const handleSubmit = () => {
+        login(email,password);
+        while(getTocken() == ""){}
+        window.location.reload();
+    }
     return (
         <div>
             <NavigationBar/>
@@ -26,20 +50,20 @@ const Login = () => {
                         </p>
                     </div>
                     <div className="mt-8 space-y-6">
-                        <input type="hidden" name="remember" defaultValue="true" />
                         <div className="-space-y-px rounded-md shadow-sm ">
                             <div>
-                                <label htmlFor="email-address" className="sr-only">
+                                <label htmlFor="email" className="sr-only">
                                     Adresse mail
                                 </label>
                                 <input
-                                    id="email-address"
+                                    id="email"
                                     name="email"
                                     type="email"
                                     autoComplete="email"
                                     required
                                     className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                     placeholder="Adresse mail"
+                                    onChange = {(e) => handleInputChange(e)}
                                 />
                             </div>
                             <div>
@@ -54,40 +78,26 @@ const Login = () => {
                                     required
                                     className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                     placeholder="Mot de passe"
+                                    onChange = {(e) => handleInputChange(e)}
                                 />
                             </div>
                         </div>
 
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                                <input
-                                    id="remember-me"
-                                    name="remember-me"
-                                    type="checkbox"
-                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                />
-                                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                                    Se souvenir de moi
-                                </label>
-                            </div>
+                        <div className="flex items-center justify-end">
 
                             <div className="text-sm">
-                                <a href="#" className="font-medium text-secondary text-600 hover:text-primary">
+                                <a href="/recover" className="font-medium text-secondary text-600 hover:text-primary">
                                     Mot de passe oublié?
                                 </a>
                             </div>
                         </div>
 
                         <div>
-                            <button
-                                type="submit"
-                                className="group relative flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium hover:bg-primary hover:text-tertiary focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                            <a onClick={handleSubmit}
+                                className="group relative flex w-full justify-center rounded-md border border-transparent py-2 px-4 text-sm font-medium hover:bg-primary hover:text-tertiary active:bg-secondary active:scale-90 active:duration-200"
                             >
-                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                  <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
-                </span>
                                 Se connecter
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </div>

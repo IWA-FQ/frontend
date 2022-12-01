@@ -44,7 +44,6 @@ const displayUserBtn = (display : boolean, open : any) => {
 const NavigationBar = () => {
     const currentUser = getCurrentUser()
     const handleLogout = (e : any) => {
-        console.log('ici')
         logout()
     }
 
