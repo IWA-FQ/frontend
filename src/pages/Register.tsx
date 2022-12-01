@@ -22,7 +22,6 @@ const Register = () => {
     const [role,setRole] = useState([Role.EMPLOYEE])
     const handleInputChange = (e : any) => {
         const {id , value} = e.target;
-        console.log(id,value);
         switch (id) {
             case "firstname" : {
                 setFirstname(value)
