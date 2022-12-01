@@ -4,7 +4,7 @@ import {Disclosure, Menu, Transition} from "@headlessui/react";
 import SearchBar from "./SearchBar";
 import {Link} from "react-router-dom";
 import {UserModel} from "../models/UserModel";
-import {getCurrentUser, isAuthenticated, isEmployer} from "../services/authentication.service";
+import {getCurrentUser, isAuthenticated, isEmployer, logout} from "../services/authentication.service";
 
 interface NavigationBarData {
     user : UserModel
@@ -17,10 +17,6 @@ const navigationJobSeeker = [
 ]
 const navigationEmployer = [
     { name: 'Mes offres', href: '#', current: false },
-]
-const userNavigation = [
-    { name: 'Mon profil', href: '/account' },
-    { name: 'Se déconnecter', href: '/' },
 ]
 
 const navigation = employerRole ? navigationEmployer : navigationJobSeeker;
@@ -47,6 +43,11 @@ const displayUserBtn = (display : boolean, open : any) => {
 
 const NavigationBar = () => {
     const currentUser = getCurrentUser()
+    const handleLogout = (e : any) => {
+        console.log('ici')
+        logout()
+    }
+
     return (
         <div className="pt-2 pb-2 shadow-lg sticky top-0 z-50 bg-tertiary">
             <Disclosure as="nav" className="bg-transparent text-secondary">
@@ -91,10 +92,10 @@ const NavigationBar = () => {
                                         {/* Profile dropdown */}
                                         <Menu as="div" className="relative ml-3">
                                             <div>
-                                                <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm">
+                                                {isAuthenticated() ? <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm">
                                                     <span className="sr-only">Open user menu</span>
                                                     <img className="h-12 w-12 rounded-full" src="assets/img/person.PNG" alt="" />
-                                                </Menu.Button>
+                                                </Menu.Button> : <></>}
                                             </div>
                                             <Transition
                                                 as={Fragment}
@@ -106,21 +107,32 @@ const NavigationBar = () => {
                                                 leaveTo="transform opacity-0 scale-95"
                                             >
                                                 <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                                    {userNavigation.map((item) => (
-                                                        <Menu.Item key={item.name}>
+                                                        <Menu.Item key={"Mon profil"}>
                                                             {({ active }) => (
                                                                 <a
-                                                                    href={item.href}
+                                                                    href={"/account"}
                                                                     className={classNames(
                                                                         active ? 'bg-gray-100' : '',
                                                                         'block px-4 py-2 text-sm text-gray-700'
                                                                     )}
                                                                 >
-                                                                    {item.name}
+                                                                    {"Mon profil"}
                                                                 </a>
                                                             )}
                                                         </Menu.Item>
-                                                    ))}
+                                                        <Menu.Item key={"Se déconnecter"}>
+                                                    {({ active }) => (
+                                                        <a href={"/"}
+                                                        onClick={(e)=>handleLogout(e)}
+                                                        className={classNames(
+                                                        active ? 'bg-gray-100' : '',
+                                                        'block px-4 py-2 text-sm text-gray-700'
+                                                        )}
+                                                        >
+                                                    {"Se déconnecter"}
+                                                        </a>
+                                                        )}
+                                                        </Menu.Item>
                                                 </Menu.Items>
                                             </Transition>
                                         </Menu>
@@ -158,16 +170,22 @@ const NavigationBar = () => {
                                     </div>
                                 </div>
                                 <div className="mt-3 space-y-1 px-2">
-                                    {userNavigation.map((item) => (
-                                        <Disclosure.Button
-                                            key={item.name}
-                                            as="a"
-                                            href={item.href}
-                                            className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-primary"
-                                        >
-                                            {item.name}
-                                        </Disclosure.Button>
-                                    ))}
+                                    <Disclosure.Button
+                                        key={"Mon profil"}
+                                        as="a"
+                                        href={"/account"}
+                                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-primary"
+                                    >{"Mon profil"}
+                                    </Disclosure.Button>
+                                    <Disclosure.Button
+                                    key={"Se déconnecter"}
+                                    as="a"
+                                    onClick={(e : any)=>handleLogout(e)}
+                                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-primary"
+                                    >
+                                        {"Se déconnecter"}
+                                    </Disclosure.Button>
+
                                 </div>
                             </div>
                         </Disclosure.Panel>
