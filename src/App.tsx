@@ -12,18 +12,13 @@ import {Role} from "./models/Role";
 import PublicRooter from "./routing/PublicRooter";
 
 const AppRouting = () => {
-    cleanLocalStorage()
-    setRoles([Role.EMPLOYEE,Role.ADMIN])
-    updateCurrentUser(1,"Quentin","Desbrousses","quentin.desb@gmail.com","Montpellier",34000,"UX Design","cv.fr")
-    return ProtectedRooters()
     if(isAuthenticated()) {
         let roles = getRoles()
         if(roles) return ProtectedRooters()
         return <PublicRooter />
     }
-    else {
-        return <PublicRooter />
-    }
+    return <PublicRooter />
+
 }
 
 function App() {

@@ -5,6 +5,7 @@ import {getCurrentUser} from "../services/authentication.service";
 
 const Account = () => {
     const currentUser = getCurrentUser();
+    console.log(currentUser)
     return (
         <div>
             <NavigationBar />
