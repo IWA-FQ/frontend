@@ -2,32 +2,37 @@ import axios from "axios";
 import {Role} from "../models/Role";
 import {UserModel} from "../models/UserModel";
 
-export const api_link = process.env.REACT_APP_API_URL
-
 /*** METHODS ***/
 
-export const register = (firstname : string, lastname: string, email: string, roles : Role[], password : string) => {
+var api = process.env.REACT_APP_API_URL;
+
+export const register = (firstname : string, lastname: string, email: string, password : string, city: string, city_code : number, work_field : string, cv_link : string, roles : Role[]) => {
     let data = {
         firstname:firstname,
         lastname:lastname,
         email:email,
+        password:password,
+        city:city,
+        city_code:city_code,
+        work_field:work_field,
+        cv_link:cv_link,
         roles:roles,
-        password:password
     }
     axios
-        .put(api_link+"/auth/signup",data)
+        .post("http://localhost:8080/api"+"/auth/signup",data,{})
         .then((res)=> {
             let r = res.data.user
+            console.log("res",r)
             setToken(res.data.accessToken)
-            setRoles(JSON.parse((r.roles)))
-            updateCurrentUser(r.id_user,r.firstname,r.lastname,r.email,r.city,r.city_code,r.work_field,r.cv_link)
+            setRoles(roles)
+            updateCurrentUser(r.id,r.firstname,r.lastname,r.email,r.city,r.city_code,r.work_field,r.cv_link)
         })
         .catch((err) => console.error(err));
 }
 
 export const login = (email : string, password : string) => {
     axios
-        .post(api_link+"/auth/signin",{email:email,password:password})
+        .post("http://localhost:8080/api"+"/auth/signin",{email:email,password:password})
         .then((res)=> {
             let r = res.data.user
             setToken(res.data.accessToken)
@@ -57,23 +62,22 @@ export const getRoles = () : Role[] => {
     let rlNotNull = rl ? rl : []
     const roles : Role[] = []
     for (const role of rlNotNull) {
-        switch (+role) {
-            case 1 : {
+        switch (role) {
+            case "admin" : {
                 roles.push(Role.ADMIN)
                 break
             }
-            case 2 : {
+            case "employee" : {
                 roles.push(Role.EMPLOYEE)
                 break
             }
-            case 3 : {
+            case "recruiter" : {
                 roles.push(Role.RECRUITER)
                 break
             }
             default : { break }
         }
     }
-    console.log(roles)
     return roles
 }
 export const setRoles = (roles : Role[]) => {

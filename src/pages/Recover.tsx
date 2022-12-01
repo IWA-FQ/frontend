@@ -16,7 +16,7 @@ const Recover = () => {
                             Récupération de mon mot de passe
                         </h2>
                     </div>
-                    <form className="mt-8 space-y-6" action="/home" method="GET">
+                    <form className="mt-8 space-y-6">
                         <input type="hidden" name="remember" defaultValue="true" />
                         <div className="-space-y-px rounded shadow-sm ">
                             <div>

@@ -65,8 +65,9 @@ const NavigationBar = () => {
                                     </div>
                                     <div className="hidden md:block">
                                         <div className="ml-10 flex items-baseline space-x-4">
-                                            <SearchBar placeholder={employerRole ? 'Rechercher un candidat' : 'Rechercher un job'}/>
+                                            {isAuthenticated() ? <SearchBar placeholder={employerRole ? 'Rechercher un candidat' : 'Rechercher un job'}/> : <></>}
                                             {navigation.map((item) => (
+                                                isAuthenticated() ?
                                                 <a
                                                     key={item.name}
                                                     href={item.href}
@@ -80,6 +81,7 @@ const NavigationBar = () => {
                                                 >
                                                     {item.name}
                                                 </a>
+                                                    : <></>
                                             ))}
                                         </div>
                                     </div>

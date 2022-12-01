@@ -1,10 +1,9 @@
 import React from 'react';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import NavigationBar from "../components/NavigationBar";
-import {isAuthenticated} from "../services/authentication.service";
 
 const Login = () => {
-    const isConnected = isAuthenticated();
+
     return (
         <div>
             <NavigationBar/>
@@ -21,12 +20,12 @@ const Login = () => {
                         </h2>
                         <p className="mt-2 text-center text-sm text-600">
                             Ou{' '}
-                            <a href="#" className="font-medium text-secondary text-600 hover:text-primary">
+                            <a href="/register" className="font-medium text-secondary text-600 hover:text-primary">
                                 inscription ici
                             </a>
                         </p>
                     </div>
-                    <form className="mt-8 space-y-6" action="/home" method="GET">
+                    <div className="mt-8 space-y-6">
                         <input type="hidden" name="remember" defaultValue="true" />
                         <div className="-space-y-px rounded-md shadow-sm ">
                             <div>
@@ -90,7 +89,7 @@ const Login = () => {
                                 Se connecter
                             </button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
