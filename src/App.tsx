@@ -1,25 +1,35 @@
 import React from 'react';
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Recover from "./pages/Recover";
-import Account from "./pages/Account";
-import NotFound from "./pages/NotFound";
-import OfferDetails from "./pages/OfferDetails";
+import {BrowserRouter} from 'react-router-dom'
+import {
+    cleanLocalStorage,
+    getRoles,
+    isAuthenticated,
+    setRoles,
+    updateCurrentUser
+} from "./services/authentication.service";
+import ProtectedRooters from "./routing/ProtectedRooters";
+import {Role} from "./models/Role";
+import PublicRooter from "./routing/PublicRooter";
+
+const AppRouting = () => {
+    cleanLocalStorage()
+    setRoles([Role.EMPLOYEE,Role.ADMIN])
+    updateCurrentUser(1,"Quentin","Desbrousses","quentin.desb@gmail.com","Montpellier",34000,"UX Design","cv.fr")
+    return ProtectedRooters()
+    if(isAuthenticated()) {
+        let roles = getRoles()
+        if(roles) return ProtectedRooters()
+        return <PublicRooter />
+    }
+    else {
+        return <PublicRooter />
+    }
+}
 
 function App() {
   return (
       <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<Login/>} />
-            <Route path="/register" element={<Register/>} />
-            <Route path="/recover" element={<Recover/>} />
-            <Route path="/home" element={<Home/>} />
-            <Route path="/account" element={<Account/>} />
-            <Route path="/offer/details" element={<OfferDetails/>} />
-            <Route path="*" element={<NotFound/>} />
-        </Routes>
+        <AppRouting/>
       </BrowserRouter>
   );
 }

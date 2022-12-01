@@ -3,13 +3,15 @@ import {Bars3Icon, BellIcon, XMarkIcon} from "@heroicons/react/24/outline";
 import {Disclosure, Menu, Transition} from "@headlessui/react";
 import SearchBar from "./SearchBar";
 import {Link} from "react-router-dom";
+import {UserModel} from "../models/UserModel";
+import {getCurrentUser, isAuthenticated, isEmployer} from "../services/authentication.service";
 
-const user = {
-    name: 'Will Smith',
-    email: 'wsmith@example.com',
-    imageUrl:
-        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+interface NavigationBarData {
+    user : UserModel
 }
+
+const employerRole = isEmployer()
+
 const navigationJobSeeker = [
     { name: 'Mes candidatures', href: '#', current: false },
 ]
@@ -18,16 +20,33 @@ const navigationEmployer = [
 ]
 const userNavigation = [
     { name: 'Mon profil', href: '/account' },
-    { name: 'Se déconnecter', href: '#' },
+    { name: 'Se déconnecter', href: '/' },
 ]
-const isEmployer = false
-const navigation = isEmployer ? navigationEmployer : navigationJobSeeker;
+
+const navigation = employerRole ? navigationEmployer : navigationJobSeeker;
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
+const displayUserBtn = (display : boolean, open : any) => {
+    return !display ? <></>
+        :
+        <div className="-mr-2 flex md:hidden">
+            {/* Mobile menu button */}
+            <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 hover:text-primary">
+                <span className="sr-only">Open main menu</span>
+                {open ? (
+                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                ) : (
+                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                )}
+            </Disclosure.Button>
+        </div>
+}
+
 const NavigationBar = () => {
+    const currentUser = getCurrentUser()
     return (
         <div className="pt-2 pb-2 shadow-lg sticky top-0 z-50 bg-tertiary">
             <Disclosure as="nav" className="bg-transparent text-secondary">
@@ -46,7 +65,7 @@ const NavigationBar = () => {
                                     </div>
                                     <div className="hidden md:block">
                                         <div className="ml-10 flex items-baseline space-x-4">
-                                            <SearchBar placeholder={isEmployer ? 'Rechercher un candidat' : 'Rechercher un job'}/>
+                                            <SearchBar placeholder={employerRole ? 'Rechercher un candidat' : 'Rechercher un job'}/>
                                             {navigation.map((item) => (
                                                 <a
                                                     key={item.name}
@@ -105,17 +124,7 @@ const NavigationBar = () => {
                                         </Menu>
                                     </div>
                                 </div>
-                                <div className="-mr-2 flex md:hidden">
-                                    {/* Mobile menu button */}
-                                    <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 hover:text-primary">
-                                        <span className="sr-only">Open main menu</span>
-                                        {open ? (
-                                            <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                                        ) : (
-                                            <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                                        )}
-                                    </Disclosure.Button>
-                                </div>
+                                {displayUserBtn(isAuthenticated(),open)}
                             </div>
                         </div>
 
@@ -125,7 +134,7 @@ const NavigationBar = () => {
                                     <Link
                                         key={item.name}
                                         to={item.href}
-                                        state={user}
+                                        state={currentUser}
                                         className={classNames(
                                             item.current ? 'bg-gray-900 text-primary' : 'text-gray-300 hover:bg-gray-700 hover:text-primary',
                                             'block px-3 py-2 rounded-md text-base font-medium'
@@ -142,8 +151,8 @@ const NavigationBar = () => {
                                         <img className="h-10 w-10 rounded-full" src="assets/img/person.PNG" alt="" />
                                     </div>
                                     <div className="ml-3">
-                                        <div className="text-base font-medium leading-none text-primary">{user.name}</div>
-                                        <div className="text-sm font-medium leading-none">{user.email}</div>
+                                        <div className="text-base font-medium leading-none text-primary">{currentUser ? currentUser.firstname + currentUser.lastname : "Aucun utilisateur"}</div>
+                                        <div className="text-sm font-medium leading-none">{currentUser ? currentUser.email : "Aucun utilisateur"}</div>
                                     </div>
                                 </div>
                                 <div className="mt-3 space-y-1 px-2">

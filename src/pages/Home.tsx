@@ -6,13 +6,9 @@ import {UserModel} from "../models/UserModel";
 import UserList from "../components/User/UserList";
 import OfferList from "../components/Offer/OfferList";
 import Footer from "../components/Footer";
-import {get} from "../services/http.service";
+import {getCurrentUser} from "../services/authentication.service";
 
-interface test {
-    id : number
-    userId : number
-    title : string
-}
+//TODO delete static properties
 const isEmployer = false;
 const offers = [
     new OfferModel(1,2,"UX / UI Design",
@@ -33,6 +29,7 @@ const users = [
     new UserModel(25,"Prénom 25","Nom","prenom.nom@gmail.com","Ville",34000,"Domaine d\'activité","lien_du_cv.fr"),
     new UserModel(62,"Prénom 62","Nom","prenom.nom@gmail.com","Ville",34000,"Domaine d\'activité","lien_du_cv.fr"),
 ]
+
 
 const listToDisplay = () => {
 
@@ -56,7 +53,7 @@ const listToDisplay = () => {
 }
 
 const Home = () => {
-
+    const currentUser = getCurrentUser();
     return (
         <div>
             <NavigationBar />

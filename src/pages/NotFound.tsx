@@ -1,8 +1,10 @@
 import React from 'react';
 import NavigationBar from "../components/NavigationBar";
 import Footer from "../components/Footer";
+import {getCurrentUser} from "../services/authentication.service";
 
 const NotFound = () => {
+    const currentUser = getCurrentUser();
     return (
         <div>
             <NavigationBar/>
