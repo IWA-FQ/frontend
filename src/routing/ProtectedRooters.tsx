@@ -6,6 +6,7 @@ import Home from "../pages/Home";
 import Account from "../pages/Account";
 import OfferDetails from "../pages/OfferDetails";
 import NotFound from "../pages/NotFound";
+import EmployerOffers from "../pages/EmployerOffers";
 
 const ProtectedRooters = () => {
     return (
@@ -13,6 +14,7 @@ const ProtectedRooters = () => {
             <Route path="/home" element={<Home/>} />
             <Route path="/account" element={<Account/>} />
             <Route path="/offer/details" element={<OfferDetails/>} />
+            <Route path="/offer/employer" element={<EmployerOffers/>} />
             <Route path="/" element={<Navigate to="/home"/>} />
             <Route path="*" element={<Home/>} />
         </Routes>

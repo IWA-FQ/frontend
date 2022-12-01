@@ -16,7 +16,7 @@ const navigationJobSeeker = [
     { name: 'Mes candidatures', href: '#', current: false },
 ]
 const navigationEmployer = [
-    { name: 'Mes offres', href: '#', current: false },
+    { name: 'Mes offres', href: '/offer/employer', current: false },
 ]
 
 const navigation = employerRole ? navigationEmployer : navigationJobSeeker;
