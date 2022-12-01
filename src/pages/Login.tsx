@@ -1,9 +1,13 @@
 import React from 'react';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
+import NavigationBar from "../components/NavigationBar";
+import {isAuthenticated} from "../services/authentication.service";
 
 const Login = () => {
+    const isConnected = isAuthenticated();
     return (
         <div>
+            <NavigationBar/>
             <div className="flex min-h-full items-center justify-center py-12 px-6 sm:px-8 lg:px-12">
                 <div className="w-full max-w-md space-y-8 rounded bg-white border-2 p-12">
                     <div>

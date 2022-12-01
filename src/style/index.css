@@ -8,5 +8,5 @@
 }
 body {
     @apply text-primary;
-    @apply bg-tertiary;
+    background-color: #d6e9ee;
 }
