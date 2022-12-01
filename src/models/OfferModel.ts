@@ -1,19 +1,19 @@
 export class OfferModel {
     id_offer : number;
     id_employer : number;
-    title : string;
-    description : string;
-    keywords : string;
-    start_date : Date;
-    end_date : Date;
-    city : string;
-    city_code : number;
-    nb_positions : number;
-    salary : number;
-    advantage : string;
+    title : string | null;
+    description : string | null;
+    keywords : string | null;
+    start_date : Date | null;
+    end_date : Date | null;
+    city : string | null;
+    city_code : number | null;
+    nb_positions : number | null;
+    salary : number | null;
+    advantage : string | null;
 
 
-    constructor(id_offer: number, id_employer: number, title: string, description: string, keywords: string, start_date: Date, end_date: Date, city: string, city_code: number, nb_positions: number, salary: number, advantage: string) {
+    constructor(id_offer: number, id_employer: number, title: string | null, description: string | null, keywords: string | null, start_date: Date | null, end_date: Date | null, city: string | null, city_code: number | null, nb_positions: number | null, salary: number | null, advantage: string | null) {
         this.id_offer = id_offer;
         this.id_employer = id_employer;
         this.title = title;
@@ -32,9 +32,12 @@ export class OfferModel {
      *
      * @param daysPerMonth
      */
-    getPeriod(daysPerMonth : number = 20) : number {
+    getPeriod(daysPerMonth : number = 20) : string {
+        if(!this.start_date || !this.end_date){
+            return "Durée indéterminée"
+        }
         let timeInMilisec: number = Math.abs(this.end_date.getTime() - this.start_date.getTime());
         let period : number = Math.ceil(timeInMilisec / (1000 * 60 * 60 * 24));
-        return period / daysPerMonth;
+        return "("+period / daysPerMonth + " mois)";
     }
 }
