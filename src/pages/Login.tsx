@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import NavigationBar from "../components/NavigationBar";
 import {getTocken, isAuthenticated, login} from "../services/authentication.service";
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate()
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
     const handleInputChange = (e : any) => {
         const {id , value} = e.target;
-        console.log(id,value);
         switch (id) {
             case "email" : {
                 setEmail(value)
@@ -23,10 +24,8 @@ const Login = () => {
         }
 
     }
-    const handleSubmit = () => {
-        login(email,password);
-        while(getTocken() == ""){}
-        window.location.reload();
+    const handleSubmit = async () => {
+        await login(email,password);
     }
     return (
         <div>

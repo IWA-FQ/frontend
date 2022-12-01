@@ -14,7 +14,7 @@ const ProtectedRooters = () => {
             <Route path="/account" element={<Account/>} />
             <Route path="/offer/details" element={<OfferDetails/>} />
             <Route path="/" element={<Navigate to="/home"/>} />
-            <Route path="*" element={<NotFound/>} />
+            <Route path="*" element={<Home/>} />
         </Routes>
     )
 };

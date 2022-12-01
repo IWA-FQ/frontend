@@ -24,8 +24,9 @@ export const register = (firstname : string, lastname: string, email: string, pa
             let r = res.data.user
             console.log("res",r)
             setToken(res.data.accessToken)
-            setRoles(roles)
+            setRoles(r.roles)
             updateCurrentUser(r.id,r.firstname,r.lastname,r.email,r.city,r.city_code,r.work_field,r.cv_link)
+            window.location.reload()
         })
         .catch((err) => console.error(err));
 }
@@ -36,8 +37,9 @@ export const login = (email : string, password : string) => {
         .then((res)=> {
             let r = res.data.user
             setToken(res.data.accessToken)
-            setRoles(JSON.parse((r.roles)))
-            updateCurrentUser(r.id_user,r.firstname,r.lastname,r.email,r.city,r.city_code,r.work_field,r.cv_link)
+            updateCurrentUser(r.id,r.firstname,r.lastname,r.email,r.city,r.city_code,r.work_field,r.cv_link)
+            setRoles(r.roles)
+            window.location.reload()
         })
         .catch((err) => console.error(err));
 }
@@ -80,8 +82,32 @@ export const getRoles = () : Role[] => {
     }
     return roles
 }
-export const setRoles = (roles : Role[]) => {
-    localStorage.setItem('roles',roles.toString());
+export const setRoles = (roles : [{id:number,name:string}]) => {
+    if(!roles) {
+        localStorage.setItem("roles","null")
+        return
+    }
+    const rolesToStore = [];
+    for(const role of roles) {
+        switch (role.name) {
+            case "ROLE_EMPLOYEE": {
+                rolesToStore.push("employee")
+                break
+            }
+            case "ROLE_RECRUITER": {
+                rolesToStore.push("recruiter")
+                break
+            }
+            case "ROLE_ADMIN": {
+                rolesToStore.push("admin")
+                break
+            }
+            default : {
+                break
+            }
+        }
+    }
+    localStorage.setItem('roles',rolesToStore.toString());
 }
 
 export const getIdUser = () : number => {
@@ -166,6 +192,9 @@ export const getCurrentUser = () => {
 }
 
 export const updateCurrentUser = (id_user : number, firstname : string, lastname : string, email : string, city : string, city_code : number, work_field : string, cv_link : string) => {
+    localStorage.setItem("id_user",id_user.toString())
+    localStorage.setItem("firstname",firstname)
+    localStorage.setItem("lastname",firstname)
     setIdUser(id_user)
     setFirstname(firstname)
     setLastname(lastname)
