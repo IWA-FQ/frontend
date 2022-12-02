@@ -4,7 +4,7 @@ import {UserModel} from "../models/UserModel";
 
 /*** METHODS ***/
 
-var api = process.env.REACT_APP_API_URL;
+let api = process.env.REACT_APP_API_URL;
 
 export const register = (firstname : string, lastname: string, email: string, password : string, city: string, city_code : number, work_field : string, cv_link : string, roles : Role[]) => {
     let data = {
@@ -19,7 +19,7 @@ export const register = (firstname : string, lastname: string, email: string, pa
         roles:roles,
     }
     axios
-        .post("http://localhost:8080/api"+"/auth/signup",data,{})
+        .post(process.env.REACT_APP_API_URL+"/auth/signup",data,{})
         .then((res)=> {
             let r = res.data.user
             setToken(res.data.accessToken)
@@ -32,7 +32,7 @@ export const register = (firstname : string, lastname: string, email: string, pa
 
 export const login = (email : string, password : string) => {
     axios
-        .post("http://localhost:8080/api"+"/auth/signin",{email:email,password:password})
+        .post(process.env.REACT_APP_API_URL+"/auth/signin",{email:email,password:password})
         .then((res)=> {
             let r = res.data.user
             setToken(res.data.accessToken)
@@ -57,7 +57,7 @@ export const updateAccount = (firstname : string, lastname: string, email: strin
     const token = getTocken();
     const tokenToGive: string = token ? "Bearer " + token : "";
     axios
-        .patch("http://localhost:8080/api"+"/user/"+getIdUser(),data,{headers: {Authorization: tokenToGive}})
+        .patch(process.env.REACT_APP_API_URL+"/user/"+getIdUser(),data,{headers: {Authorization: tokenToGive}})
         .then((res)=> {
             let r = res.data.user
             setToken(res.data.accessToken)
