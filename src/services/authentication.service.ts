@@ -22,7 +22,6 @@ export const register = (firstname : string, lastname: string, email: string, pa
         .post("http://localhost:8080/api"+"/auth/signup",data,{})
         .then((res)=> {
             let r = res.data.user
-            console.log("res",r)
             setToken(res.data.accessToken)
             setRoles(r.roles)
             updateCurrentUser(r.id,r.firstname,r.lastname,r.email,r.city,r.city_code,r.work_field,r.cv_link)
@@ -39,6 +38,30 @@ export const login = (email : string, password : string) => {
             setToken(res.data.accessToken)
             updateCurrentUser(r.id,r.firstname,r.lastname,r.email,r.city,r.city_code,r.work_field,r.cv_link)
             setRoles(r.roles)
+            window.location.reload()
+        })
+        .catch((err) => console.error(err));
+}
+
+export const updateAccount = (firstname : string, lastname: string, email: string, password : string, city: string, city_code : number, work_field : string, cv_link : string) => {
+    let data = {
+        firstname:firstname,
+        lastname:lastname,
+        email:email,
+        password:password,
+        city:city,
+        city_code:city_code,
+        work_field:work_field,
+        cv_link:cv_link,
+    }
+    const token = getTocken();
+    const tokenToGive: string = token ? "Bearer " + token : "";
+    axios
+        .patch("http://localhost:8080/api"+"/user/"+getIdUser(),data,{headers: {Authorization: tokenToGive}})
+        .then((res)=> {
+            let r = res.data.user
+            setToken(res.data.accessToken)
+            updateCurrentUser(r.id,r.firstname,r.lastname,r.email,r.city,r.city_code,r.work_field,r.cv_link)
             window.location.reload()
         })
         .catch((err) => console.error(err));
