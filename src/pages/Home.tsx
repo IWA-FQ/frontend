@@ -17,7 +17,7 @@ const Home = () => {
         let offersList :OfferModel[]=[]
         getAllOffers().then((res) => {
             res.data.map((offer : any) => {
-                const off = new OfferModel(offer.id,offer.idEmployer,offer.title,offer.description,offer.keywords,offer.start_date,offer.end_date,offer.city,offer.city_code,offer.nb_positions,offer.salary,offer.advantage)
+                const off = new OfferModel(offer.id,offer.idEmployer,offer.title,offer.description,offer.keywords,new Date(offer.start_date),new Date(offer.end_date),offer.city,offer.city_code,offer.nb_positions,offer.salary,offer.advantage)
                 offersList.push(off)
             })
             setOffers(offersList)
